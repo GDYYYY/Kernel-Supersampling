@@ -44,6 +44,7 @@ class SRData(data.Dataset):
             # Binary files are stored in 'bin' folder
             # If the binary file exists, load it. If not, make it.
             list_hr, list_lr = self._scan()
+            # print("line47 list")
             self.images_hr = self._check_and_load(
                 args.ext, list_hr, self._name_hrbin()
             )
@@ -90,6 +91,7 @@ class SRData(data.Dataset):
         # print(self.images_lr)
 
         if train:
+            # print("\nimages_hr length:{}\n".format(len(self.images_hr)))
             self.repeat \
                 = args.test_every // (len(self.images_hr) // args.batch_size)
             print("train repeat:" + str(self.repeat))
@@ -104,6 +106,7 @@ class SRData(data.Dataset):
                 os.path.join(self.dir_lr, 'X{}'.format(self.scale)) , 
                 '*' + self.ext[0]))
         )
+        print(self.dir_hr,names_hr,names_lr)
         return names_hr, names_lr
 
     def _set_filesystem(self, dir_data):
